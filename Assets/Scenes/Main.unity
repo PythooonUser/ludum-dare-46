@@ -2660,6 +2660,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6929559557f81c441994c7f69ee66321, type: 3}
+--- !u!4 &1865256944 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5193144906506321628, guid: d37ff627df40e7a439462e714bcd8247,
+    type: 3}
+  m_PrefabInstance: {fileID: 817422443}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1926018233 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1468568652825897507, guid: 6929559557f81c441994c7f69ee66321,
@@ -3087,9 +3093,9 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 516223269457873058, guid: 68ab074dee600e6499c404c16a61598b,
         type: 3}
-      propertyPath: gradient.m_Mode
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1865256944}
     - target: {fileID: 6600568353580449245, guid: 68ab074dee600e6499c404c16a61598b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3150,11 +3156,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 8502341063562509074, guid: 68ab074dee600e6499c404c16a61598b,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: f3cbf887d3e1ce847ab3ffaf9ed97372, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68ab074dee600e6499c404c16a61598b, type: 3}
 --- !u!4 &9156591146452008957 stripped

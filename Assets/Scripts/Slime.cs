@@ -8,10 +8,15 @@ public class Slime : MonoBehaviour
     [SerializeField] float speed = 0.25f;
     [SerializeField] float size = 1f;
 
+    [Header("References")]
+    [SerializeField] Transform player = default;
+    [SerializeField] Transform speechBubbleAnchor = default;
+
     void Update()
     {
         HandleIdleAnimation();
         HandleSizeChange();
+        HandleSpeechBubbleRotation();
     }
 
     void HandleIdleAnimation()
@@ -33,5 +38,10 @@ public class Slime : MonoBehaviour
         {
             size += 0.15f;
         }
+    }
+
+    void HandleSpeechBubbleRotation()
+    {
+        speechBubbleAnchor.LookAt(-player.position);
     }
 }
