@@ -15,7 +15,6 @@ public class Slime : MonoBehaviour, IInteractable
     void Update()
     {
         HandleIdleAnimation();
-        // HandleSizeChange();
         HandleSpeechBubbleRotation();
     }
 
@@ -27,17 +26,14 @@ public class Slime : MonoBehaviour, IInteractable
         transform.localScale = scale;
     }
 
-    void HandleSizeChange()
+    void GrowSize()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            size -= 0.15f;
-        }
+        size += 0.15f;
+    }
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            size += 0.15f;
-        }
+    void ShrinkSize()
+    {
+        size -= 0.15f;
     }
 
     void HandleSpeechBubbleRotation()
@@ -59,6 +55,14 @@ public class Slime : MonoBehaviour, IInteractable
     {
         if (!interactionController.isHoldingResource) { return; }
 
-        Debug.Log("Feeding the slime");
+        HandHeld handHeld = interactionController.GetHandHeld();
+        interactionController.SetHandHeld(null, false);
+
+        Resource worldModelInstance = Instantiate(handHeld.GetWorldModel(), transform.position + Vector3.up * size * 0.5f, Random.rotation, transform);
+        worldModelInstance.transform.localScale = Vector3.one * size * 0.5f;
+
+        GrowSize();
+
+        interactionController.RefreshSelection();
     }
 }

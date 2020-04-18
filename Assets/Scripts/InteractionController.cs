@@ -15,9 +15,10 @@ public class InteractionController : MonoBehaviour
     [SerializeField] new Camera camera = default;
     [SerializeField] Transform handHeldAnchor = default;
 
-    public bool isHoldingResource { get; private set; }
+    public bool isHoldingResource { get { return m_handHeld != null; } }
 
     IInteractable m_selection = default;
+    HandHeld m_handHeld = default;
 
     void Start()
     {
@@ -58,6 +59,22 @@ public class InteractionController : MonoBehaviour
         }
     }
 
+    public void RefreshSelection()
+    {
+        if (m_selection != null)
+        {
+            SetSelectionName(m_selection.GetName());
+
+            string action = m_selection.GetAction(this);
+            SetSelectionAction(action != "" ? "Press 'E' " + action : "");
+        }
+        else
+        {
+            SetSelectionName("");
+            SetSelectionAction("");
+        }
+    }
+
     void SetSelectionName(string name)
     {
         selectionNameText.text = name;
@@ -78,7 +95,7 @@ public class InteractionController : MonoBehaviour
         }
     }
 
-    public void SetHandHeld(HandHeld handHeld)
+    public void SetHandHeld(HandHeld handHeld, bool dropWorldModel = true)
     {
         if (handHeldAnchor.childCount > 0)
         {
@@ -86,17 +103,18 @@ public class InteractionController : MonoBehaviour
             Resource worldModel = child.GetComponent<HandHeld>().GetWorldModel();
             Destroy(child);
 
-            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit, 100f, groundLayerMask))
+            if (dropWorldModel)
             {
-                Instantiate(worldModel, hit.point, Quaternion.identity);
+                Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out RaycastHit hit, 100f, groundLayerMask))
+                {
+                    Instantiate(worldModel, hit.point, Quaternion.identity);
+                }
+                else
+                {
+                    Instantiate(worldModel, transform.position, Quaternion.identity);
+                }
             }
-            else
-            {
-                Instantiate(worldModel, transform.position, Quaternion.identity);
-            }
-
-            isHoldingResource = false;
         }
 
         if (handHeld != null)
@@ -104,7 +122,16 @@ public class InteractionController : MonoBehaviour
             HandHeld handHeldInstance = Instantiate(handHeld);
             handHeldInstance.transform.SetParent(handHeldAnchor, false);
 
-            isHoldingResource = true;
+            m_handHeld = handHeldInstance;
         }
+        else
+        {
+            m_handHeld = null;
+        }
+    }
+
+    public HandHeld GetHandHeld()
+    {
+        return m_handHeld;
     }
 }
