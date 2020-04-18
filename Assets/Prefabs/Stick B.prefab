@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 822861957040646057}
   - component: {fileID: 8516414819536477599}
   - component: {fileID: 2669767353236185446}
-  m_Layer: 0
-  m_Name: Stick_B
+  - component: {fileID: 5989296197054476370}
+  m_Layer: 8
+  m_Name: Stick B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,6 +81,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &5989296197054476370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4409091448851518906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c6af7ce0d0cf4f4b983274d79a66a8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Birch Tree Stick
 --- !u!1 &5944220176559906581
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,7 +104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7968683012371903941}
   - component: {fileID: 8773338075932968272}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

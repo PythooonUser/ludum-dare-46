@@ -15,7 +15,7 @@ public class Slime : MonoBehaviour
     void Update()
     {
         HandleIdleAnimation();
-        HandleSizeChange();
+        // HandleSizeChange();
         HandleSpeechBubbleRotation();
     }
 

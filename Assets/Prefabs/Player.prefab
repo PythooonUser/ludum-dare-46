@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5193144906506321628}
   - component: {fileID: 4435100312064676016}
   - component: {fileID: 1553527418350954055}
+  - component: {fileID: 4983241614661631092}
   - component: {fileID: 7482335830755809233}
   m_Layer: 0
   m_Name: Player
@@ -66,9 +67,28 @@ MonoBehaviour:
   groundCheckLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  groundCheckDistance: 1
+  groundCheckDistance: 2
   inputHandler: {fileID: 4435100312064676016}
   characterController: {fileID: 7482335830755809233}
+  camera: {fileID: 4976378139729636602}
+--- !u!114 &4983241614661631092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2234116899452192746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e617884570e04540bd99d8690385968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionRadius: 4
+  interactionLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  selectionText: {fileID: 0}
+  actionText: {fileID: 0}
   camera: {fileID: 4976378139729636602}
 --- !u!143 &7482335830755809233
 CharacterController:
