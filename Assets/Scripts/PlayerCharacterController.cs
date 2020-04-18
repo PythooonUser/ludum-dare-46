@@ -81,6 +81,11 @@ public class PlayerCharacterController : MonoBehaviour
         transform.Rotate(new Vector3(0f, inputHandler.GetLookInputHorizontal(), 0f), Space.Self);
     }
 
+    public float GetMoveVelocityMagnitude()
+    {
+        return m_moveVelocity.magnitude;
+    }
+
     void OnValidate()
     {
         SetCharacterHeight();
