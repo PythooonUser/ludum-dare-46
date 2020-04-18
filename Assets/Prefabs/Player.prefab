@@ -186,7 +186,7 @@ MonoBehaviour:
   smoothTime: 0.1
   groundCheckLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1024
   groundCheckDistance: 2
   inputHandler: {fileID: 4435100312064676016}
   characterController: {fileID: 7482335830755809233}
@@ -207,9 +207,13 @@ MonoBehaviour:
   interactionLayerMask:
     serializedVersion: 2
     m_Bits: 256
-  selectionText: {fileID: 0}
-  actionText: {fileID: 0}
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  selectionNameText: {fileID: 0}
+  selectionActionText: {fileID: 0}
   camera: {fileID: 4976378139729636602}
+  handHeldAnchor: {fileID: 301707951}
 --- !u!143 &7482335830755809233
 CharacterController:
   m_ObjectHideFlags: 0

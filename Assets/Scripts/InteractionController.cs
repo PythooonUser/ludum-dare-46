@@ -7,18 +7,22 @@ public class InteractionController : MonoBehaviour
 {
     [SerializeField] float interactionRadius = 4f;
     [SerializeField] LayerMask interactionLayerMask = -1;
+    [SerializeField] LayerMask groundLayerMask = -1;
 
     [Header("References")]
-    [SerializeField] Text selectionText = default;
-    [SerializeField] Text actionText = default;
+    [SerializeField] Text selectionNameText = default;
+    [SerializeField] Text selectionActionText = default;
     [SerializeField] new Camera camera = default;
-    [SerializeField] Transform handheldAnchor = default;
+    [SerializeField] Transform handHeldAnchor = default;
 
-    Resource m_selection = default;
+    public bool isHoldingResource { get; private set; }
+
+    IInteractable m_selection = default;
 
     void Start()
     {
-        SetText("");
+        SetSelectionName("");
+        SetSelectionAction("");
     }
 
     void Update()
@@ -33,58 +37,74 @@ public class InteractionController : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, interactionRadius, interactionLayerMask))
         {
-            Resource resource = hit.collider.GetComponentInParent<Resource>();
+            IInteractable interactable = hit.collider.GetComponentInParent<IInteractable>();
 
-            if (resource != m_selection)
+            if (interactable != m_selection)
             {
-                m_selection = resource;
-                SetText(resource.GetName());
+                m_selection = interactable;
+
+                SetSelectionName(interactable.GetName());
+
+                string action = interactable.GetAction(this);
+                SetSelectionAction(action != "" ? "Press 'E' " + action : "");
             }
         }
         else
         {
             m_selection = null;
-            SetText("");
+
+            SetSelectionName("");
+            SetSelectionAction("");
         }
     }
 
-    void SetText(string text)
+    void SetSelectionName(string name)
     {
-        selectionText.text = text;
+        selectionNameText.text = name;
+    }
 
-        actionText.gameObject.SetActive(text != "");
+    void SetSelectionAction(string action)
+    {
+        selectionActionText.text = action;
     }
 
     void HandleInteraction()
     {
-        if (!m_selection) { return; }
+        if (m_selection == null) { return; }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Vector3 selectionPosition = m_selection.transform.position;
-            Quaternion selectionRotation = m_selection.transform.rotation;
-
-            GameObject handHeldPrefab = m_selection.PickUp();
-            SetHandHeld(handHeldPrefab, selectionPosition, selectionRotation);
+            m_selection.Interact(this);
         }
     }
 
-    void SetHandHeld(GameObject handHeld, Vector3 position, Quaternion rotation)
+    public void SetHandHeld(HandHeld handHeld)
     {
-        if (handheldAnchor.childCount > 0)
+        if (handHeldAnchor.childCount > 0)
         {
-            GameObject child = handheldAnchor.GetChild(0).gameObject;
-
+            GameObject child = handHeldAnchor.GetChild(0).gameObject;
             Resource worldModel = child.GetComponent<HandHeld>().GetWorldModel();
-            Instantiate(worldModel, position, rotation);
-
             Destroy(child);
+
+            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit, 100f, groundLayerMask))
+            {
+                Instantiate(worldModel, hit.point, Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(worldModel, transform.position, Quaternion.identity);
+            }
+
+            isHoldingResource = false;
         }
 
         if (handHeld != null)
         {
-            GameObject handHeldInstance = Instantiate(handHeld);
-            handHeldInstance.transform.SetParent(handheldAnchor, false);
+            HandHeld handHeldInstance = Instantiate(handHeld);
+            handHeldInstance.transform.SetParent(handHeldAnchor, false);
+
+            isHoldingResource = true;
         }
     }
 }

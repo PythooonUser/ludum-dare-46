@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Slime : MonoBehaviour
+public class Slime : MonoBehaviour, IInteractable
 {
     [Header("Animation")]
     [SerializeField] float speed = 0.25f;
@@ -43,5 +43,22 @@ public class Slime : MonoBehaviour
     void HandleSpeechBubbleRotation()
     {
         speechBubbleAnchor.LookAt(-player.position);
+    }
+
+    public string GetName()
+    {
+        return "Slime";
+    }
+
+    public string GetAction(InteractionController interactionController)
+    {
+        return interactionController.isHoldingResource ? "to feed" : "";
+    }
+
+    public void Interact(InteractionController interactionController)
+    {
+        if (!interactionController.isHoldingResource) { return; }
+
+        Debug.Log("Feeding the slime");
     }
 }

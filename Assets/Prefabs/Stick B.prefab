@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4409091448851518906}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Birch Tree Stick
-  handheldPrefab: {fileID: 1906856488535321287, guid: c24bf1632fff4a44d94f94d90eb9fcba,
+  handHeldPrefab: {fileID: 6703013112786695968, guid: c24bf1632fff4a44d94f94d90eb9fcba,
     type: 3}
 --- !u!1 &5944220176559906581
 GameObject:

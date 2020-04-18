@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1174836905}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Speech Bubble Anchor
   m_TagString: Untagged
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1395658768}
   - component: {fileID: 1395658767}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Speech_Bubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4540509891544158542}
   - component: {fileID: 7768201379694303677}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 2793053435540785131}
   - component: {fileID: 8502341063562509074}
   - component: {fileID: 516223269457873058}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}

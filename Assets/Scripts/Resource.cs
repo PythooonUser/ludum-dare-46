@@ -2,19 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Resource : MonoBehaviour
+public class Resource : MonoBehaviour, IInteractable
 {
-    [SerializeField] new string name = default;
-    [SerializeField] GameObject handheldPrefab = default;
+    [SerializeField] new string name = "Resource";
+    [SerializeField] HandHeld handHeldPrefab = default;
 
     public string GetName()
     {
         return name;
     }
 
-    public GameObject PickUp()
+    public string GetAction(InteractionController interactionController)
+    {
+        return interactionController.isHoldingResource ? "to swap" : "to pick up";
+    }
+
+    public void Interact(InteractionController interactionController)
     {
         Destroy(gameObject);
-        return handheldPrefab;
+        interactionController.SetHandHeld(handHeldPrefab);
     }
 }
