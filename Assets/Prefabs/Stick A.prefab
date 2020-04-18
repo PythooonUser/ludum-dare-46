@@ -138,3 +138,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Oak Tree Stick
+  handheldPrefab: {fileID: 2688324633299836426, guid: d0a601f1da788a540b0a32ad391e8a29,
+    type: 3}

@@ -12,6 +12,7 @@ public class InteractionController : MonoBehaviour
     [SerializeField] Text selectionText = default;
     [SerializeField] Text actionText = default;
     [SerializeField] new Camera camera = default;
+    [SerializeField] Transform handheldAnchor = default;
 
     Resource m_selection = default;
 
@@ -60,7 +61,30 @@ public class InteractionController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            m_selection.PickUp();
+            Vector3 selectionPosition = m_selection.transform.position;
+            Quaternion selectionRotation = m_selection.transform.rotation;
+
+            GameObject handHeldPrefab = m_selection.PickUp();
+            SetHandHeld(handHeldPrefab, selectionPosition, selectionRotation);
+        }
+    }
+
+    void SetHandHeld(GameObject handHeld, Vector3 position, Quaternion rotation)
+    {
+        if (handheldAnchor.childCount > 0)
+        {
+            GameObject child = handheldAnchor.GetChild(0).gameObject;
+
+            Resource worldModel = child.GetComponent<HandHeld>().GetWorldModel();
+            Instantiate(worldModel, position, rotation);
+
+            Destroy(child);
+        }
+
+        if (handHeld != null)
+        {
+            GameObject handHeldInstance = Instantiate(handHeld);
+            handHeldInstance.transform.SetParent(handheldAnchor, false);
         }
     }
 }
