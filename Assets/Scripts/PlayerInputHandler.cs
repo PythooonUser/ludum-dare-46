@@ -4,15 +4,32 @@ using UnityEngine;
 
 public class PlayerInputHandler : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] float lookSensitivity = 1f;
+
     void Start()
     {
-
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    public Vector3 GetMoveInput()
     {
+        Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
+        input = Vector3.ClampMagnitude(input, 1f);
+        return input;
+    }
 
+    public float GetLookInputHorizontal()
+    {
+        float input = Input.GetAxisRaw("Mouse X");
+        input *= lookSensitivity;
+        return input;
+    }
+
+    public float GetLookInputVertical()
+    {
+        float input = -Input.GetAxisRaw("Mouse Y");
+        input *= lookSensitivity;
+        return input;
     }
 }
