@@ -1,0 +1,12 @@
+## VS Code generated files and folders
+.vscode/
+
+## Unity generated files and folders
+*.csproj
+*.sln
+
+Build/
+Library/
+Logs/
+obj/
+Temp/
