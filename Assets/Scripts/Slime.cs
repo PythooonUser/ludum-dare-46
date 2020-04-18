@@ -10,12 +10,10 @@ public class Slime : MonoBehaviour, IInteractable
 
     [Header("References")]
     [SerializeField] Transform player = default;
-    [SerializeField] Transform speechBubbleAnchor = default;
 
     void Update()
     {
         HandleIdleAnimation();
-        HandleSpeechBubbleRotation();
     }
 
     void HandleIdleAnimation()
@@ -34,11 +32,6 @@ public class Slime : MonoBehaviour, IInteractable
     void ShrinkSize()
     {
         size -= 0.15f;
-    }
-
-    void HandleSpeechBubbleRotation()
-    {
-        speechBubbleAnchor.LookAt(-player.position);
     }
 
     public string GetName()
