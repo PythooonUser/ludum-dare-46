@@ -667,6 +667,83 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 169418747}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &205229193
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 205229194}
+  - component: {fileID: 205229196}
+  - component: {fileID: 205229195}
+  m_Layer: 5
+  m_Name: Player Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &205229194
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205229193}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.359361, y: 0.359361, z: 0.359361}
+  m_Children: []
+  m_Father: {fileID: 1214059137}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 9.1, y: 0}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &205229195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205229193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 80
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 6
+    m_MaxSize: 80
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: YOU!
+--- !u!222 &205229196
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205229193}
+  m_CullTransparentMesh: 0
 --- !u!4 &229050670 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5723357290515036219, guid: 3775622e6dfde434096f5dc37843a6f8,
@@ -821,7 +898,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 05cd18ea43e2f1442b17da75a88d8723, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -3027,6 +3104,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 290562690}
+  - {fileID: 205229194}
   m_Father: {fileID: 1236579155}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3191,6 +3269,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anchor: {fileID: 1174836905}
   player: {fileID: 1865256944}
+  sprites:
+  - {fileID: 21300000, guid: 05cd18ea43e2f1442b17da75a88d8723, type: 3}
+  - {fileID: 21300000, guid: c63710903b012824c8057d4646e4a48d, type: 3}
+  contentImage: {fileID: 290562691}
+  playerText: {fileID: 205229195}
 --- !u!4 &1250535859 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5723357290515036219, guid: 3775622e6dfde434096f5dc37843a6f8,
@@ -5586,23 +5669,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1174836905, guid: 68ab074dee600e6499c404c16a61598b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.486
-      objectReference: {fileID: 0}
-    - target: {fileID: 1174836905, guid: 68ab074dee600e6499c404c16a61598b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1395658766, guid: 68ab074dee600e6499c404c16a61598b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 516223269457873058, guid: 68ab074dee600e6499c404c16a61598b,
         type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1865256944}
+    - target: {fileID: 516223269457873058, guid: 68ab074dee600e6499c404c16a61598b,
+        type: 3}
+      propertyPath: speechBubble
+      value: 
+      objectReference: {fileID: 1236579156}
     - target: {fileID: 6600568353580449245, guid: 68ab074dee600e6499c404c16a61598b,
         type: 3}
       propertyPath: m_LocalPosition.x

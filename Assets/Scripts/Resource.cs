@@ -6,6 +6,7 @@ public class Resource : MonoBehaviour, IInteractable
 {
     [SerializeField] new string name = "Resource";
     [SerializeField] HandHeld handHeldPrefab = default;
+    public ResourceType type;
 
     public string GetName()
     {

@@ -96,6 +96,7 @@ MonoBehaviour:
   name: Birch Tree Stick
   handHeldPrefab: {fileID: 6703013112786695968, guid: c24bf1632fff4a44d94f94d90eb9fcba,
     type: 3}
+  type: 1
 --- !u!1 &5944220176559906581
 GameObject:
   m_ObjectHideFlags: 0
