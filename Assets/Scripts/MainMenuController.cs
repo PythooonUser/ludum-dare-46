@@ -9,6 +9,8 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] CanvasGroup introGroup = default;
     [SerializeField] CanvasGroup keyPressGroup = default;
 
+    [SerializeField] AudioSource introClip = default;
+
     [SerializeField] bool m_keyPressStartsGame = false;
 
     void Start()
@@ -24,6 +26,10 @@ public class MainMenuController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             m_keyPressStartsGame = false;
+            if (introClip.isPlaying)
+            {
+                introClip.Stop();
+            }
             SceneManager.LoadScene("Main", LoadSceneMode.Single);
         }
     }
@@ -69,6 +75,11 @@ public class MainMenuController : MonoBehaviour
 
         group.alpha = 0f;
         group.interactable = false;
+
+        if (group == introGroup)
+        {
+            introClip.Play();
+        }
 
         float percent = 0f;
         while (percent < 1f)

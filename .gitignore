@@ -5,7 +5,7 @@
 *.csproj
 *.sln
 
-Build/
+Builds/
 Library/
 Logs/
 obj/
