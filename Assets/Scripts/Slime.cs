@@ -4,23 +4,31 @@ using UnityEngine;
 
 public class Slime : MonoBehaviour, IInteractable
 {
-    [Header("Animation")]
+    [Header("Idle Animation")]
     [SerializeField] float speed = 0.25f;
     [SerializeField] float size = 1f;
+    [SerializeField] Color hurtColor = default;
+    [SerializeField] Color healColor = default;
+    [SerializeField] Color deathColor = default;
+    [SerializeField] float flashTime = 0.25f;
 
     [Header("Hunger")]
     [SerializeField] bool canBeFed = true;
     [SerializeField] float starveTick = 2f;
     [SerializeField] float sizeChangeAmountByStarving = 0.05f;
     [SerializeField] float sizeChangeAmountByFeeding = 0.15f;
+    [SerializeField] float starvationThreshold = 0.5f;
     [SerializeField] HungerNeed[] hungerNeeds = default;
 
     [Header("References")]
     [SerializeField] Transform player = default;
     [SerializeField] SpeechBubble speechBubble = default;
+    [SerializeField] MeshRenderer meshRenderer = default;
+    [SerializeField] GameObject colliderParent = default;
 
     int m_currentNeedIndex = 0;
     float m_timeSinceLastStarveTick = 0f;
+    bool m_isAlive = true;
 
     void Start()
     {
@@ -35,6 +43,8 @@ public class Slime : MonoBehaviour, IInteractable
 
     void HandleIdleAnimation()
     {
+        if (!m_isAlive) { return; }
+
         float percent = (Mathf.Sin(Time.time * speed) + 1f) * 0.5f;
         Vector3 scale = Vector3.one * size * Mathf.Lerp(0.995f, 1.05f, percent);
 
@@ -53,17 +63,17 @@ public class Slime : MonoBehaviour, IInteractable
 
     public string GetName()
     {
-        return "Slime";
+        return m_isAlive ? "Slime" : "Dead Slime";
     }
 
     public string GetAction(InteractionController interactionController)
     {
-        return (interactionController.isHoldingResource && canBeFed) ? "to feed" : "";
+        return (interactionController.isHoldingResource && canBeFed && m_isAlive) ? "to feed" : "";
     }
 
     public void Interact(InteractionController interactionController)
     {
-        if (!interactionController.isHoldingResource || !canBeFed) { return; }
+        if (!interactionController.isHoldingResource || !canBeFed || !m_isAlive) { return; }
 
         HandHeld handHeld = interactionController.GetHandHeld();
         interactionController.SetHandHeld(null, false);
@@ -81,8 +91,8 @@ public class Slime : MonoBehaviour, IInteractable
         if (type == hungerNeeds[m_currentNeedIndex].type)
         {
             hungerNeeds[m_currentNeedIndex].Consume();
-            // TODO: Let the slime grow and show next item in speech bubble
             GrowSize();
+            StartCoroutine(HealFlash());
             m_timeSinceLastStarveTick = 0f;
 
             if (hungerNeeds[m_currentNeedIndex].amount <= 0)
@@ -104,8 +114,9 @@ public class Slime : MonoBehaviour, IInteractable
         }
         else
         {
-            // TODO: Let the slime shrink
             ShrinkSize();
+            StartCoroutine(HurtFlash());
+            CheckIsAlive();
         }
     }
 
@@ -116,6 +127,8 @@ public class Slime : MonoBehaviour, IInteractable
 
     void HandleStarving()
     {
+        if (!m_isAlive) { return; }
+
         m_timeSinceLastStarveTick += Time.deltaTime;
 
         if (m_timeSinceLastStarveTick >= starveTick)
@@ -128,5 +141,106 @@ public class Slime : MonoBehaviour, IInteractable
     void Starve()
     {
         size -= sizeChangeAmountByStarving;
+        StartCoroutine(HurtFlash());
+        CheckIsAlive();
+    }
+
+    IEnumerator HurtFlash()
+    {
+        Color color = meshRenderer.material.color;
+        float startTime = Time.time;
+
+        float percent = 0f;
+        while (percent < 1f)
+        {
+            percent = (Time.time - startTime) / flashTime;
+            Color flashColor = Color.Lerp(color, hurtColor, percent);
+            meshRenderer.material.SetColor("_Color", flashColor);
+            yield return null;
+        }
+
+        startTime = Time.time;
+        percent = 0f;
+        while (percent < 1f)
+        {
+            percent = (Time.time - startTime) / flashTime;
+            Color flashColor = Color.Lerp(hurtColor, color, percent);
+            meshRenderer.material.SetColor("_Color", flashColor);
+            yield return null;
+        }
+
+        meshRenderer.material.SetColor("_Color", color);
+    }
+
+    IEnumerator HealFlash()
+    {
+        Color color = meshRenderer.material.color;
+        float startTime = Time.time;
+
+        float percent = 0f;
+        while (percent < 1f)
+        {
+            percent = (Time.time - startTime) / flashTime;
+            Color flashColor = Color.Lerp(color, healColor, percent);
+            meshRenderer.material.SetColor("_Color", flashColor);
+            yield return null;
+        }
+
+        startTime = Time.time;
+        percent = 0f;
+        while (percent < 1f)
+        {
+            percent = (Time.time - startTime) / flashTime;
+            Color flashColor = Color.Lerp(healColor, color, percent);
+            meshRenderer.material.SetColor("_Color", flashColor);
+            yield return null;
+        }
+
+        meshRenderer.material.SetColor("_Color", color);
+    }
+
+    IEnumerator DieAnimation()
+    {
+        Color color = meshRenderer.material.color;
+        Vector3 scale = transform.localScale;
+        Vector3 deathScale = new Vector3(scale.x * 1.25f, 0.1f, scale.z * 1.25f);
+
+        float startTime = Time.time;
+
+        float percent = 0f;
+        while (percent < 1f)
+        {
+            percent = (Time.time - startTime) / 2f;
+
+            Color flashColor = Color.Lerp(color, deathColor, percent);
+            meshRenderer.material.SetColor("_Color", flashColor);
+
+            Vector3 flashScale = Vector3.Lerp(scale, deathScale, percent);
+            transform.localScale = flashScale;
+
+            yield return null;
+        }
+
+        meshRenderer.material.SetColor("_Color", deathColor);
+        transform.localScale = deathScale;
+    }
+
+    void CheckIsAlive()
+    {
+        if (size < starvationThreshold)
+        {
+            m_isAlive = false;
+            speechBubble.gameObject.SetActive(false);
+            StopAllCoroutines();
+            StartCoroutine(FlashCollider());
+            StartCoroutine(DieAnimation());
+        }
+    }
+
+    IEnumerator FlashCollider()
+    {
+        colliderParent.SetActive(false);
+        yield return null;
+        colliderParent.SetActive(true);
     }
 }

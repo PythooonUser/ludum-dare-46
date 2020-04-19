@@ -170,16 +170,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   size: 1
+  hurtColor: {r: 0.9150943, g: 0.11654504, b: 0.3187751, a: 0.8}
+  healColor: {r: 0.28104898, g: 0.048282307, b: 0.3301887, a: 0.8}
+  deathColor: {r: 0.14298835, g: 0.016820932, b: 0.16981131, a: 0.9490196}
+  flashTime: 0.35
   canBeFed: 1
   starveTick: 4
   sizeChangeAmountByStarving: 0.05
-  sizeChangeAmountByFeeding: 0.15
+  sizeChangeAmountByFeeding: 0.2
+  starvationThreshold: 0.75
   hungerNeeds:
   - type: 0
     amount: 1
   - type: 1
     amount: 2
   - type: 0
-    amount: 1
+    amount: 3
+  - type: 1
+    amount: 2
   player: {fileID: 0}
   speechBubble: {fileID: 0}
+  meshRenderer: {fileID: 8502341063562509074}
+  colliderParent: {fileID: 7139595852134159943}
