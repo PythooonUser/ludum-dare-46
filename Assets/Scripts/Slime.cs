@@ -25,6 +25,7 @@ public class Slime : MonoBehaviour, IInteractable
     [SerializeField] SpeechBubble speechBubble = default;
     [SerializeField] MeshRenderer meshRenderer = default;
     [SerializeField] GameObject colliderParent = default;
+    [SerializeField] GameManager gameManager = default;
 
     int m_currentNeedIndex = 0;
     float m_timeSinceLastStarveTick = 0f;
@@ -210,7 +211,7 @@ public class Slime : MonoBehaviour, IInteractable
         float percent = 0f;
         while (percent < 1f)
         {
-            percent = (Time.time - startTime) / 2f;
+            percent = (Time.time - startTime) / 3f;
 
             Color flashColor = Color.Lerp(color, deathColor, percent);
             meshRenderer.material.SetColor("_Color", flashColor);
@@ -223,6 +224,9 @@ public class Slime : MonoBehaviour, IInteractable
 
         meshRenderer.material.SetColor("_Color", deathColor);
         transform.localScale = deathScale;
+
+        yield return new WaitForSeconds(1f);
+        gameManager.GameLost();
     }
 
     void CheckIsAlive()

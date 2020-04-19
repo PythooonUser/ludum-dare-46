@@ -40,17 +40,20 @@ public class PlayerInputHandler : MonoBehaviour
         return input;
     }
 
-    public void SetMenuInteractivity(bool activate)
+    public void SetMenuInteractivity(bool activate, bool cursor = true)
     {
-        if (activate)
+        if (cursor)
         {
-            Cursor.lockState = CursorLockMode.Confined;
-            Cursor.visible = true;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            if (activate)
+            {
+                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = true;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
         }
 
         m_canInteract = !activate;

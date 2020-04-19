@@ -12,6 +12,8 @@ public class PauseMenuController : MonoBehaviour
 
     bool m_isPaused = false;
 
+    public bool canPause = true;
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -22,7 +24,10 @@ public class PauseMenuController : MonoBehaviour
             }
             else
             {
-                PauseGame();
+                if (canPause)
+                {
+                    PauseGame();
+                }
             }
 
             audioSource.Play();

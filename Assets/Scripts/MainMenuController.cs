@@ -15,6 +15,9 @@ public class MainMenuController : MonoBehaviour
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+
         menuGroup.alpha = 0f;
         StartCoroutine(FadeInGroup(menuGroup, 2f, 2f));
     }
