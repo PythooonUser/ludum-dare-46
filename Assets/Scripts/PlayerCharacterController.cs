@@ -19,6 +19,8 @@ public class PlayerCharacterController : MonoBehaviour
     [SerializeField] CharacterController characterController = default;
     [SerializeField] new Camera camera = default;
 
+    public bool canMove = true;
+
     float m_cameraVerticalAngle = 0f;
     Vector3 m_moveVelocity = Vector3.zero;
     Vector3 m_smoothVelocity = Vector3.zero;
@@ -31,9 +33,12 @@ public class PlayerCharacterController : MonoBehaviour
     void Update()
     {
         HandleGroundCheck();
-        HandleMovement();
-        HandleVerticalLook();
-        HandleHorizontalLook();
+        if (canMove)
+        {
+            HandleMovement();
+            HandleVerticalLook();
+            HandleHorizontalLook();
+        }
     }
 
     void SetCharacterHeight()

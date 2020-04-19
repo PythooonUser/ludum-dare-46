@@ -6,7 +6,7 @@ public class Slime : MonoBehaviour, IInteractable
 {
     [Header("Idle Animation")]
     [SerializeField] float speed = 0.25f;
-    [SerializeField] float size = 1f;
+    public float size = 1f;
     [SerializeField] Color hurtColor = default;
     [SerializeField] Color healColor = default;
     [SerializeField] Color deathColor = default;
@@ -31,6 +31,7 @@ public class Slime : MonoBehaviour, IInteractable
     int m_currentNeedIndex = 0;
     float m_timeSinceLastStarveTick = 0f;
     bool m_isAlive = true;
+    bool m_canStarve = true;
 
     void Start()
     {
@@ -111,10 +112,11 @@ public class Slime : MonoBehaviour, IInteractable
 
                 if (m_currentNeedIndex > hungerNeeds.Length - 1)
                 {
-                    // TODO: Play endgame cinematic
-                    Debug.Log("END");
                     canBeFed = false;
+                    m_canStarve = false;
                     UpdateSpeechBubble(ResourceType.Player);
+                    gameManager.GameWon();
+
                 }
                 else
                 {
@@ -137,7 +139,7 @@ public class Slime : MonoBehaviour, IInteractable
 
     void HandleStarving()
     {
-        if (!m_isAlive) { return; }
+        if (!m_isAlive || !m_canStarve) { return; }
 
         m_timeSinceLastStarveTick += Time.deltaTime;
 
@@ -257,5 +259,10 @@ public class Slime : MonoBehaviour, IInteractable
         colliderParent.SetActive(false);
         yield return null;
         colliderParent.SetActive(true);
+    }
+
+    public void DisableCollider()
+    {
+        colliderParent.SetActive(false);
     }
 }
