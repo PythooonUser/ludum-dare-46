@@ -18,6 +18,7 @@ public class Slime : MonoBehaviour, IInteractable
     [SerializeField] float sizeChangeAmountByStarving = 0.05f;
     [SerializeField] float sizeChangeAmountByFeeding = 0.15f;
     [SerializeField] float starvationThreshold = 0.5f;
+    [SerializeField] ParticleSystem hurtParticles = default;
     [SerializeField] HungerNeed[] hungerNeeds = default;
 
     [Header("References")]
@@ -55,11 +56,19 @@ public class Slime : MonoBehaviour, IInteractable
     void GrowSize()
     {
         size += sizeChangeAmountByFeeding;
+        AdjustParticleSystem();
     }
 
     void ShrinkSize()
     {
         size -= sizeChangeAmountByFeeding;
+        AdjustParticleSystem();
+    }
+
+    void AdjustParticleSystem()
+    {
+        var shape = hurtParticles.shape;
+        shape.radius = size;
     }
 
     public string GetName()
@@ -150,6 +159,8 @@ public class Slime : MonoBehaviour, IInteractable
     {
         Color color = meshRenderer.material.color;
         float startTime = Time.time;
+
+        hurtParticles.Play();
 
         float percent = 0f;
         while (percent < 1f)
