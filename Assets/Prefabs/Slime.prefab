@@ -170,9 +170,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   size: 1
+  canBeFed: 1
+  starveTick: 2
+  sizeChangeAmountByStarving: 0.02
+  sizeChangeAmountByFeeding: 0.15
   hungerNeeds:
   - type: 0
     amount: 1
   - type: 1
     amount: 2
+  - type: 0
+    amount: 1
   player: {fileID: 0}
+  speechBubble: {fileID: 0}

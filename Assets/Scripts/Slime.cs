@@ -10,6 +10,9 @@ public class Slime : MonoBehaviour, IInteractable
 
     [Header("Hunger")]
     [SerializeField] bool canBeFed = true;
+    [SerializeField] float starveTick = 2f;
+    [SerializeField] float sizeChangeAmountByStarving = 0.05f;
+    [SerializeField] float sizeChangeAmountByFeeding = 0.15f;
     [SerializeField] HungerNeed[] hungerNeeds = default;
 
     [Header("References")]
@@ -17,6 +20,7 @@ public class Slime : MonoBehaviour, IInteractable
     [SerializeField] SpeechBubble speechBubble = default;
 
     int m_currentNeedIndex = 0;
+    float m_timeSinceLastStarveTick = 0f;
 
     void Start()
     {
@@ -26,6 +30,7 @@ public class Slime : MonoBehaviour, IInteractable
     void Update()
     {
         HandleIdleAnimation();
+        HandleStarving();
     }
 
     void HandleIdleAnimation()
@@ -38,12 +43,12 @@ public class Slime : MonoBehaviour, IInteractable
 
     void GrowSize()
     {
-        size += 0.15f;
+        size += sizeChangeAmountByFeeding;
     }
 
     void ShrinkSize()
     {
-        size -= 0.15f;
+        size -= sizeChangeAmountByFeeding;
     }
 
     public string GetName()
@@ -78,6 +83,7 @@ public class Slime : MonoBehaviour, IInteractable
             hungerNeeds[m_currentNeedIndex].Consume();
             // TODO: Let the slime grow and show next item in speech bubble
             GrowSize();
+            m_timeSinceLastStarveTick = 0f;
 
             if (hungerNeeds[m_currentNeedIndex].amount <= 0)
             {
@@ -106,5 +112,21 @@ public class Slime : MonoBehaviour, IInteractable
     void UpdateSpeechBubble(ResourceType type)
     {
         speechBubble.UpdateContent(type);
+    }
+
+    void HandleStarving()
+    {
+        m_timeSinceLastStarveTick += Time.deltaTime;
+
+        if (m_timeSinceLastStarveTick >= starveTick)
+        {
+            Starve();
+            m_timeSinceLastStarveTick = 0f;
+        }
+    }
+
+    void Starve()
+    {
+        size -= sizeChangeAmountByStarving;
     }
 }
