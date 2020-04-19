@@ -5679,16 +5679,6 @@ PrefabInstance:
       propertyPath: speechBubble
       value: 
       objectReference: {fileID: 1236579156}
-    - target: {fileID: 516223269457873058, guid: 68ab074dee600e6499c404c16a61598b,
-        type: 3}
-      propertyPath: starveTick
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 516223269457873058, guid: 68ab074dee600e6499c404c16a61598b,
-        type: 3}
-      propertyPath: sizeChangeAmountByStarving
-      value: 0.02
-      objectReference: {fileID: 0}
     - target: {fileID: 6600568353580449245, guid: 68ab074dee600e6499c404c16a61598b,
         type: 3}
       propertyPath: m_LocalPosition.x

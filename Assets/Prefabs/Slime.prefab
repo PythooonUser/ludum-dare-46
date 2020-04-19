@@ -171,8 +171,8 @@ MonoBehaviour:
   speed: 1
   size: 1
   canBeFed: 1
-  starveTick: 2
-  sizeChangeAmountByStarving: 0.02
+  starveTick: 4
+  sizeChangeAmountByStarving: 0.05
   sizeChangeAmountByFeeding: 0.15
   hungerNeeds:
   - type: 0
