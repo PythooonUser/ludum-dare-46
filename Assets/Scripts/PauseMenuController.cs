@@ -21,16 +21,16 @@ public class PauseMenuController : MonoBehaviour
             if (m_isPaused)
             {
                 ResumeGame();
+                audioSource.Play();
             }
             else
             {
                 if (canPause)
                 {
                     PauseGame();
+                    audioSource.Play();
                 }
             }
-
-            audioSource.Play();
         }
     }
 

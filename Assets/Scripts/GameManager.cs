@@ -15,10 +15,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] Camera playerCamera = default;
     [SerializeField] Slime slime = default;
 
+    public void GameLostInit()
+    {
+        pauseMenuController.canPause = false;
+    }
+
     public void GameLost()
     {
         inputHandler.SetMenuInteractivity(true, false);
-        pauseMenuController.canPause = false;
         characterController.canMove = false;
 
         StartCoroutine(FadeOutGameLost());
@@ -80,6 +84,8 @@ public class GameManager : MonoBehaviour
             slime.transform.Translate(moveDirection * Time.deltaTime * 4f);
             yield return null;
         }
+
+        slime.PlayAudio(slime.slimeEatingPlayer, true);
 
         StartCoroutine(FadeOutGameWon());
     }

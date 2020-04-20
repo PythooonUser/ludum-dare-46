@@ -21,11 +21,19 @@ public class Slime : MonoBehaviour, IInteractable
     [SerializeField] ParticleSystem hurtParticles = default;
     [SerializeField] HungerNeed[] hungerNeeds = default;
 
+    [SerializeField] AudioClip slimeEatingGood = default;
+    [SerializeField] AudioClip slimeEatingBad = default;
+    public AudioClip slimeEatingPlayer = default;
+    [SerializeField] AudioClip[] slimeStarving = default;
+    [SerializeField] AudioClip slimeDying = default;
+    [SerializeField] Vector2 hungrySoundInterval = new Vector2(3f, 10f);
+
     [Header("References")]
     [SerializeField] SpeechBubble speechBubble = default;
     [SerializeField] MeshRenderer meshRenderer = default;
     [SerializeField] GameObject colliderParent = default;
     [SerializeField] GameManager gameManager = default;
+    [SerializeField] AudioSource audioSource = default;
 
     int m_currentNeedIndex = 0;
     float m_timeSinceLastStarveTick = 0f;
@@ -104,6 +112,7 @@ public class Slime : MonoBehaviour, IInteractable
         {
             hungerNeeds[m_currentNeedIndex].Consume();
             GrowSize();
+            PlayAudio(slimeEatingGood, true);
             StartCoroutine(HealFlash());
             m_timeSinceLastStarveTick = 0f;
 
@@ -128,6 +137,7 @@ public class Slime : MonoBehaviour, IInteractable
         else
         {
             ShrinkSize();
+            PlayAudio(slimeEatingBad, true);
             StartCoroutine(HurtFlash());
             CheckIsAlive();
         }
@@ -154,6 +164,7 @@ public class Slime : MonoBehaviour, IInteractable
     void Starve()
     {
         size -= sizeChangeAmountByStarving;
+        PlayAudio(slimeStarving[Random.Range(0, slimeStarving.Length)]);
         StartCoroutine(HurtFlash());
         CheckIsAlive();
     }
@@ -216,6 +227,8 @@ public class Slime : MonoBehaviour, IInteractable
 
     IEnumerator DieAnimation()
     {
+        gameManager.GameLostInit();
+
         Color color = meshRenderer.material.color;
         Vector3 scale = transform.localScale;
         Vector3 deathScale = new Vector3(scale.x * 1.25f, 0.1f, scale.z * 1.25f);
@@ -251,6 +264,7 @@ public class Slime : MonoBehaviour, IInteractable
             speechBubble.gameObject.SetActive(false);
             StopAllCoroutines();
             StartCoroutine(FlashCollider());
+            PlayAudio(slimeDying, true);
             StartCoroutine(DieAnimation());
         }
     }
@@ -265,5 +279,18 @@ public class Slime : MonoBehaviour, IInteractable
     public void DisableCollider()
     {
         colliderParent.SetActive(false);
+    }
+
+    public void PlayAudio(AudioClip clip, bool force = false)
+    {
+        if (audioSource.isPlaying && !force) { return; }
+
+        if (force)
+        {
+            audioSource.Stop();
+        }
+
+        audioSource.clip = clip;
+        audioSource.Play();
     }
 }
