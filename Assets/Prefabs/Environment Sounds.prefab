@@ -47,7 +47,9 @@ MonoBehaviour:
   clips:
   - {fileID: 8300000, guid: 2246be7c6f35af245b90566c555e026a, type: 3}
   - {fileID: 8300000, guid: 7a17bc0006a8e05479cf0d2397b33607, type: 3}
-  timeBetweenClips: {x: 3, y: 6}
+  - {fileID: 8300000, guid: 0c0c2b2fdea8e7f4da3595326aacae83, type: 3}
+  - {fileID: 8300000, guid: 3c7982aeeadd42941b75e39e532a2aa1, type: 3}
+  timeBetweenClips: {x: 2, y: 5}
   audioSource: {fileID: 5345931711223922649}
 --- !u!82 &5345931711223922649
 AudioSource:
@@ -61,7 +63,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0

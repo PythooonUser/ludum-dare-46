@@ -5001,7 +5001,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  size: 1
+  size: 0.8
   hurtColor: {r: 0.9150943, g: 0.11654504, b: 0.3187751, a: 0.8}
   healColor: {r: 0.28104898, g: 0.048282307, b: 0.3301887, a: 0.8}
   deathColor: {r: 0.14298835, g: 0.016820932, b: 0.16981131, a: 0.9490196}
@@ -5021,12 +5021,30 @@ MonoBehaviour:
     amount: 3
   - type: 1
     amount: 2
-  slimeEatingGood: {fileID: 8300000, guid: 4f8810ddb63a29d449fad7fc1ac6d411, type: 3}
-  slimeEatingBad: {fileID: 8300000, guid: 3fc46c316811df44e943c466b1c371f0, type: 3}
-  slimeEatingPlayer: {fileID: 8300000, guid: 2e442397b52df1449a9058053c5b9f65, type: 3}
-  slimeHungry: {fileID: 8300000, guid: 015220c054650844eb8de99710a282fb, type: 3}
-  slimeStarving: {fileID: 8300000, guid: dba29a0f298394546a6835e76d6b8d8c, type: 3}
-  slimeDying: {fileID: 8300000, guid: c00b9e3658fd5c54a9c3345321549e2f, type: 3}
+  slimeEatingGood:
+  - {fileID: 8300000, guid: 4f8810ddb63a29d449fad7fc1ac6d411, type: 3}
+  - {fileID: 8300000, guid: d195542b847a946429f6bcfc1fa2c8d3, type: 3}
+  - {fileID: 8300000, guid: a3387f21dbb99b1469ce904d891dac4b, type: 3}
+  - {fileID: 8300000, guid: a72b7221f92fb5b4589e191f342dcf0f, type: 3}
+  slimeEatingBad:
+  - {fileID: 8300000, guid: 3fc46c316811df44e943c466b1c371f0, type: 3}
+  - {fileID: 8300000, guid: 4860d21b5be1bf142965485fffd32f66, type: 3}
+  - {fileID: 8300000, guid: 4487ebd57af90d04a8c52a61c1057c95, type: 3}
+  - {fileID: 8300000, guid: 25df303ed112c6746a22a462a23e723b, type: 3}
+  slimeEatingPlayer:
+  - {fileID: 8300000, guid: 2e442397b52df1449a9058053c5b9f65, type: 3}
+  - {fileID: 8300000, guid: 06c493b78f65d83419c853c3edfa3177, type: 3}
+  slimeStarving:
+  - {fileID: 8300000, guid: dba29a0f298394546a6835e76d6b8d8c, type: 3}
+  - {fileID: 8300000, guid: 963028ec4327b2347a5d8637d92af16f, type: 3}
+  - {fileID: 8300000, guid: 6c723f40d4e660d49b0262b1da84226b, type: 3}
+  - {fileID: 8300000, guid: 9bc346963f691094cafef2ff0bfd0feb, type: 3}
+  - {fileID: 8300000, guid: 1ea883af40eb3114abc8982b617cadc6, type: 3}
+  - {fileID: 8300000, guid: 2432ae2deb7c35c44951089de401bc29, type: 3}
+  - {fileID: 8300000, guid: 6b7589bc131d7bc479d7f12c6d7fce14, type: 3}
+  slimeDying:
+  - {fileID: 8300000, guid: c00b9e3658fd5c54a9c3345321549e2f, type: 3}
+  - {fileID: 8300000, guid: 42e5515f9580cb24c86faf7406291748, type: 3}
   speechBubble: {fileID: 0}
   meshRenderer: {fileID: 8502341063562509074}
   colliderParent: {fileID: 7139595852134159943}

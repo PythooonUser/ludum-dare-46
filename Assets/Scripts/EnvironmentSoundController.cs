@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnvironmentSoundController : MonoBehaviour
 {
     [SerializeField] AudioClip[] clips = default;
-    [SerializeField] Vector2 timeBetweenClips = new Vector2(3f, 6f);
+    [SerializeField] Vector2 timeBetweenClips = new Vector2(2f, 5f);
     [SerializeField] AudioSource audioSource = default;
 
     float m_timeSinceLastClip = 0f;

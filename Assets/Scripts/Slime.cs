@@ -21,12 +21,11 @@ public class Slime : MonoBehaviour, IInteractable
     [SerializeField] ParticleSystem hurtParticles = default;
     [SerializeField] HungerNeed[] hungerNeeds = default;
 
-    [SerializeField] AudioClip slimeEatingGood = default;
-    [SerializeField] AudioClip slimeEatingBad = default;
-    public AudioClip slimeEatingPlayer = default;
+    [SerializeField] AudioClip[] slimeEatingGood = default;
+    [SerializeField] AudioClip[] slimeEatingBad = default;
+    public AudioClip[] slimeEatingPlayer = default;
     [SerializeField] AudioClip[] slimeStarving = default;
-    [SerializeField] AudioClip slimeDying = default;
-    [SerializeField] Vector2 hungrySoundInterval = new Vector2(3f, 10f);
+    [SerializeField] AudioClip[] slimeDying = default;
 
     [Header("References")]
     [SerializeField] SpeechBubble speechBubble = default;
@@ -112,7 +111,7 @@ public class Slime : MonoBehaviour, IInteractable
         {
             hungerNeeds[m_currentNeedIndex].Consume();
             GrowSize();
-            PlayAudio(slimeEatingGood, true);
+            PlayAudio(slimeEatingGood[Random.Range(0, slimeEatingGood.Length)], true);
             StartCoroutine(HealFlash());
             m_timeSinceLastStarveTick = 0f;
 
@@ -137,7 +136,7 @@ public class Slime : MonoBehaviour, IInteractable
         else
         {
             ShrinkSize();
-            PlayAudio(slimeEatingBad, true);
+            PlayAudio(slimeEatingBad[Random.Range(0, slimeEatingBad.Length)], true);
             StartCoroutine(HurtFlash());
             CheckIsAlive();
         }
@@ -264,7 +263,7 @@ public class Slime : MonoBehaviour, IInteractable
             speechBubble.gameObject.SetActive(false);
             StopAllCoroutines();
             StartCoroutine(FlashCollider());
-            PlayAudio(slimeDying, true);
+            PlayAudio(slimeDying[Random.Range(0, slimeDying.Length)], true);
             StartCoroutine(DieAnimation());
         }
     }

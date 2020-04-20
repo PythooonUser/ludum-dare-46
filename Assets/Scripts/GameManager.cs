@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
-        slime.PlayAudio(slime.slimeEatingPlayer, true);
+        slime.PlayAudio(slime.slimeEatingPlayer[Random.Range(0, slime.slimeEatingPlayer.Length)], true);
 
         StartCoroutine(FadeOutGameWon());
     }
