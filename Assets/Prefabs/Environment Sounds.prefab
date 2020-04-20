@@ -44,6 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4776d24e613aa4948977a2d6c81b0ece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: 2246be7c6f35af245b90566c555e026a, type: 3}
+  - {fileID: 8300000, guid: 7a17bc0006a8e05479cf0d2397b33607, type: 3}
+  timeBetweenClips: {x: 3, y: 6}
+  audioSource: {fileID: 5345931711223922649}
 --- !u!82 &5345931711223922649
 AudioSource:
   m_ObjectHideFlags: 0
