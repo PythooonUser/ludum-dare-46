@@ -11,7 +11,7 @@ public class MainMenuController : MonoBehaviour
 
     [SerializeField] AudioSource introClip = default;
 
-    [SerializeField] bool m_keyPressStartsGame = false;
+    bool m_keyPressStartsGame = false;
 
     void Start()
     {
@@ -42,7 +42,7 @@ public class MainMenuController : MonoBehaviour
         StartCoroutine(FadeOutGroup(menuGroup, 2f, 0.1f));
         StartCoroutine(FadeInGroup(introGroup, 2f, 2f));
 
-        StartCoroutine(FadeInGroup(keyPressGroup, 1f, 6f + 0f));
+        StartCoroutine(FadeInGroup(keyPressGroup, 1f, 5f));
     }
 
     public void ExitGame()
@@ -84,6 +84,11 @@ public class MainMenuController : MonoBehaviour
             introClip.Play();
         }
 
+        if (group == keyPressGroup)
+        {
+            m_keyPressStartsGame = true;
+        }
+
         float percent = 0f;
         while (percent < 1f)
         {
@@ -94,10 +99,5 @@ public class MainMenuController : MonoBehaviour
 
         group.alpha = 1f;
         group.interactable = true;
-
-        if (group == keyPressGroup)
-        {
-            m_keyPressStartsGame = true;
-        }
     }
 }
