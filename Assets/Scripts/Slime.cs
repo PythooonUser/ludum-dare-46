@@ -22,7 +22,6 @@ public class Slime : MonoBehaviour, IInteractable
     [SerializeField] HungerNeed[] hungerNeeds = default;
 
     [Header("References")]
-    [SerializeField] Transform player = default;
     [SerializeField] SpeechBubble speechBubble = default;
     [SerializeField] MeshRenderer meshRenderer = default;
     [SerializeField] GameObject colliderParent = default;
@@ -32,10 +31,12 @@ public class Slime : MonoBehaviour, IInteractable
     float m_timeSinceLastStarveTick = 0f;
     bool m_isAlive = true;
     bool m_canStarve = true;
+    Color m_initialColor = default;
 
     void Start()
     {
         UpdateSpeechBubble(hungerNeeds[m_currentNeedIndex].type);
+        m_initialColor = meshRenderer.material.color;
     }
 
     void Update()
@@ -159,7 +160,7 @@ public class Slime : MonoBehaviour, IInteractable
 
     IEnumerator HurtFlash()
     {
-        Color color = meshRenderer.material.color;
+        Color color = m_initialColor;
         float startTime = Time.time;
 
         hurtParticles.Play();
@@ -188,7 +189,7 @@ public class Slime : MonoBehaviour, IInteractable
 
     IEnumerator HealFlash()
     {
-        Color color = meshRenderer.material.color;
+        Color color = m_initialColor;
         float startTime = Time.time;
 
         float percent = 0f;
