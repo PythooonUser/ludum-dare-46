@@ -77,7 +77,6 @@ public class GameManager : MonoBehaviour
 
         while (Vector3.Distance(slime.transform.position, characterController.transform.position) > (slime.size))
         {
-            Debug.Log(Vector3.Distance(slime.transform.position, characterController.transform.position));
             slime.transform.Translate(moveDirection * Time.deltaTime * 4f);
             yield return null;
         }

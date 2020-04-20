@@ -6866,6 +6866,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock A (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 8734215776809814568, guid: 3775622e6dfde434096f5dc37843a6f8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3775622e6dfde434096f5dc37843a6f8, type: 3}
 --- !u!4 &1210198287 stripped
@@ -8490,6 +8495,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Rock A
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734215776809814568, guid: 3775622e6dfde434096f5dc37843a6f8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3775622e6dfde434096f5dc37843a6f8, type: 3}
