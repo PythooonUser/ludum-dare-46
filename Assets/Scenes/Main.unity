@@ -12542,6 +12542,26 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1246072441}
+    - target: {fileID: 1037656886078281451, guid: 68ab074dee600e6499c404c16a61598b,
+        type: 3}
+      propertyPath: rolloffMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1037656886078281451, guid: 68ab074dee600e6499c404c16a61598b,
+        type: 3}
+      propertyPath: MaxDistance
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1037656886078281451, guid: 68ab074dee600e6499c404c16a61598b,
+        type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1037656886078281451, guid: 68ab074dee600e6499c404c16a61598b,
+        type: 3}
+      propertyPath: MinDistance
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6600568353580449245, guid: 68ab074dee600e6499c404c16a61598b,
         type: 3}
       propertyPath: m_LocalPosition.x
