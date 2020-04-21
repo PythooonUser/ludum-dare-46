@@ -191,6 +191,7 @@ MonoBehaviour:
   inputHandler: {fileID: 4435100312064676016}
   characterController: {fileID: 7482335830755809233}
   camera: {fileID: 4976378139729636602}
+  canMove: 1
 --- !u!114 &4983241614661631092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,7 +298,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 311
+    m_Bits: 1335
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
